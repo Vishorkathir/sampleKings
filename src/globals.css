@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+/* reset is in index.css — this file holds brand motion + utilities */
+
+@keyframes float-slow{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+@keyframes drift{
+  0%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(8px,-8px,0)}
+  100%{transform:translate3d(0,0,0)}
+}
+
+/* utility: reveal without gating visibility — visible by default, enhanced */
+.reveal{opacity:1;transform:none}
+@media (prefers-reduced-motion:no-preference){
+  .reveal{animation:reveal 0.6s var(--ease-out) backwards}
+  @keyframes reveal{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+}
