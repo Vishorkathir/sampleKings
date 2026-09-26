@@ -1,3 +1,4 @@
+'use client';
 import { useState, type ChangeEvent } from 'react'
 import { Avatar, Box, Button, Checkbox, Grid, LinearProgress, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import AdminLayout from '../Admin/AdminLayout'

@@ -1,3 +1,4 @@
+'use client';
 // @ts-nocheck
 import { Avatar, Box, Button, Chip, Divider, IconButton, Paper, Stack, Typography, CircularProgress, Alert } from '@mui/material'
 import { useEffect, useState } from 'react'

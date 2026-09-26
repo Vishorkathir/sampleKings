@@ -1,7 +1,10 @@
+'use client';
 // @ts-nocheck
 import { useState } from 'react'
 import { Box, Container, Typography, Grid, Button, Modal, IconButton } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation';
+
+
 import { FiArrowLeft, FiX, FiCamera, FiImage, FiMaximize2 } from 'react-icons/fi'
 import { FaWhatsapp, FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa'
 
@@ -45,7 +48,7 @@ const animStyles = `
 `
 
 export default function Gallery() {
-    const navigate = useNavigate()
+    const router = useRouter()
     const [filter, setFilter] = useState('All')
     const [lightbox, setLightbox] = useState(null) // holds the item being previewed
 
@@ -83,13 +86,13 @@ export default function Gallery() {
             }}>
                 <Container maxWidth="xl">
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1.5 }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, cursor: 'pointer' }} onClick={() => navigate('/')}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, cursor: 'pointer' }} onClick={() => router.push('/')}>
                             <Box component="img" src="/Logo.png" alt="Logo" sx={{ width: 40, height: 40, objectFit: 'contain' }} />
                             <Typography sx={{ fontWeight: 800, fontSize: 16, background: 'linear-gradient(90deg, #fff, #a3a3a3)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', display: { xs: 'none', sm: 'block' } }}>
                                 KINGS11
                             </Typography>
                         </Box>
-                        <Button onClick={() => navigate('/')} startIcon={<FiArrowLeft />}
+                        <Button onClick={() => router.push('/')} startIcon={<FiArrowLeft />}
                             sx={{ color: '#fff', border: '1px solid rgba(255,255,255,0.2)', px: 3, py: 1, borderRadius: 8, fontWeight: 600, textTransform: 'none', '&:hover': { bgcolor: 'rgba(255,255,255,0.05)' } }}>
                             Back to Home
                         </Button>

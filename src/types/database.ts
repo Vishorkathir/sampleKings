@@ -1,3 +1,4 @@
+'use client';
 export type UserRole = 'admin' | 'student'
 
 export type AdmissionStatus = 'pending' | 'admitted' | 'rejected'

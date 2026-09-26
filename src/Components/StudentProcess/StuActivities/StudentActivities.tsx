@@ -1,3 +1,4 @@
+'use client';
 // @ts-nocheck
 import {
 	Avatar,
@@ -10,7 +11,9 @@ import {
 	Stack,
 	Typography,
 } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation';
+
+
 import StudentLayout from '../StudentDashboard/StudentLayout'
 
 const attendanceStats = [
@@ -77,7 +80,7 @@ const milestones = [
 ]
 
 export default function StudentActivities() {
-	const navigate = useNavigate()
+	const router = useRouter()
 
 	return (
 		<StudentLayout activePath="/student-activities">

@@ -1,6 +1,9 @@
+'use client';
 import React, { useEffect, useMemo, useState, useCallback } from 'react'
 import { Avatar, Box, Button, Chip, Grid, Paper, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation';
+
+
 import AdminLayout from './AdminLayout'
 import Boardcast from '../AdminPage/boardcast'
 import { supabase } from '../../../utils/supabase'
@@ -39,7 +42,7 @@ const MetricCard = React.memo(function MetricCard({ icon, label, value, delta, b
 })
 
 export default function Dashboard() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const [students, setStudents] = useState<Student[]>([])
   const [loadingStudents, setLoadingStudents] = useState<boolean>(true)
   const [studentError, setStudentError] = useState<string>('')
@@ -206,7 +209,7 @@ export default function Dashboard() {
           </Box>
           <Button
             variant="contained"
-            onClick={() => navigate('/registration')}
+            onClick={() => router.push('/registration')}
             sx={{ bgcolor: 'var(--primary)', color: '#fff', textTransform: 'none', fontSize: 12.5, fontWeight: 600, py: 0.9, px: 2.2, borderRadius: '10px', '&:hover': { bgcolor: 'var(--primary-hover)' }, alignSelf: { xs: 'flex-start', sm: 'auto' } }}
           >
             + New Registration
@@ -238,7 +241,7 @@ export default function Dashboard() {
             />
             <Chip
               label="+ Register"
-              onClick={() => navigate('/registration')}
+              onClick={() => router.push('/registration')}
               sx={{ bgcolor: '#f9b90e', color: '#7b4e00', fontWeight: 700, cursor: 'pointer', px: 1.2, alignSelf: { xs: 'flex-start', sm: 'auto' } }}
             />
           </Stack>
@@ -298,7 +301,7 @@ export default function Dashboard() {
                         <Button
                           size="small"
                           variant="outlined"
-                          onClick={() => navigate(`/Admin-dashboard/edit-student/${student.id}`, { state: { student } })}
+                          onClick={() => router.push(`/Admin-dashboard/edit-student/${student.id}`)}
                           sx={{ textTransform: 'none', borderColor: '#1d4ed8', color: '#1d4ed8', fontWeight: 700 }}
                         >
                           Edit

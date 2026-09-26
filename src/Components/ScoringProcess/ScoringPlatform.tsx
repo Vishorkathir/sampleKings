@@ -1,5 +1,8 @@
+'use client';
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation';
+
+
 import { Box, Typography, Paper, Container, Button, List, ListItem, CircularProgress } from '@mui/material'
 import { supabase } from '../../utils/supabase'
 
@@ -9,7 +12,7 @@ type Todo = {
 }
 
 export default function ScoringPlatform() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const [todos, setTodos] = useState<Todo[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string>('')
@@ -37,8 +40,8 @@ export default function ScoringPlatform() {
   }, [])
 
   const handleBack = () => {
-    if (window.history.length > 1) navigate(-1)
-    else navigate('/')
+    if (window.history.length > 1) router.back()
+    else router.push('/')
   }
 
   return (
@@ -87,7 +90,7 @@ export default function ScoringPlatform() {
 
       <Paper elevation={0} sx={{ p: 3, borderRadius: 3, border: '1px solid #e8edf5', mt: 3, bgcolor: '#f8fafc' }}>
         <Typography sx={{ fontSize: 12, color: '#64748b' }}>
-          Supabase URL: <code>{import.meta.env.VITE_SUPABASE_URL}</code>
+          Supabase URL: <code>{process.env.NEXT_PUBLIC_SUPABASE_URL}</code>
         </Typography>
       </Paper>
     </Container>

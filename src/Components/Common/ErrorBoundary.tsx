@@ -1,7 +1,8 @@
+'use client';
 import { Component, type ReactNode } from 'react'
 import { Box, Typography, Button, Container } from '@mui/material'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
-import Logger from '../utils/logger'
+import Logger from '../../utils/logger'
 
 type Props = {
   children: ReactNode
@@ -66,7 +67,7 @@ class ErrorBoundary extends Component<Props, State> {
             <Typography variant="body1" sx={{ textAlign: 'center', color: '#666', mb: 2 }}>
               We&apos;re sorry for the inconvenience. Please try refreshing the page or contact support if the problem persists.
             </Typography>
-            {import.meta.env.DEV && this.state.error && (
+            {process.env.DEV && this.state.error && (
               <Box
                 sx={{
                   width: '100%',

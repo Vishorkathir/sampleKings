@@ -1,3 +1,4 @@
+'use client';
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material'
 
@@ -10,8 +11,10 @@ export function useThemeMode(): ThemeContextValue {
 }
 export default function ThemeContextProvider({ children }: { children: React.ReactNode }) {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    const saved = localStorage.getItem('cricket_academy_theme_mode')
-    if (saved) try { return JSON.parse(saved) as boolean } catch { return false }
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('cricket_academy_theme_mode')
+      if (saved) try { return JSON.parse(saved) as boolean } catch { return false }
+    }
     return false
   })
   useEffect(() => { localStorage.setItem('cricket_academy_theme_mode', JSON.stringify(isDarkMode)) }, [isDarkMode])
@@ -19,11 +22,11 @@ export default function ThemeContextProvider({ children }: { children: React.Rea
   const theme = createTheme({
     palette: {
       mode: isDarkMode ? 'dark' : 'light',
-      primary: { main: 'oklch(0.52 0.20 260)', light: 'oklch(0.60 0.18 260)', dark: 'oklch(0.42 0.19 260)' },
-      secondary: { main: 'oklch(0.84 0.18 158)' },
-      background: { default: isDarkMode ? 'oklch(0.14 0.02 260)' : 'oklch(0.985 0.01 255)', paper: isDarkMode ? 'oklch(0.19 0.02 260)' : 'oklch(1 0 0)' },
-      text: { primary: isDarkMode ? 'oklch(0.97 0.01 260)' : 'oklch(0.16 0.02 260)', secondary: isDarkMode ? 'oklch(0.78 0.02 260)' : 'oklch(0.56 0.03 260)' },
-      divider: 'oklch(0.92 0.02 260)',
+      primary: { main: '#1d4ed8', light: '#3b82f6', dark: '#0b5aa0' },
+      secondary: { main: '#10b981' },
+      background: { default: isDarkMode ? '#0f172a' : '#f8fafc', paper: isDarkMode ? '#1e293b' : '#ffffff' },
+      text: { primary: isDarkMode ? '#f1f5f9' : '#0f172a', secondary: isDarkMode ? '#cbd5e1' : '#475569' },
+      divider: isDarkMode ? '#334155' : '#e2e8f0',
     },
     shape: { borderRadius: 12 },
     typography: {
@@ -41,7 +44,7 @@ export default function ThemeContextProvider({ children }: { children: React.Rea
       },
       MuiPaper: { styleOverrides: { root: { backgroundImage: 'none' } } },
       MuiChip: { styleOverrides: { root: { fontWeight: 700 } } },
-      MuiCssBaseline: { styleOverrides: { body: { backgroundColor: isDarkMode ? 'oklch(0.14 0.02 260)' : 'oklch(0.985 0.01 255)' } } },
+      MuiCssBaseline: { styleOverrides: { body: { backgroundColor: isDarkMode ? '#0f172a' : '#f8fafc' } } },
     },
   })
   return (

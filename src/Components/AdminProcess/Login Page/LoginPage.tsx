@@ -1,5 +1,8 @@
+'use client';
 import { useState, type ChangeEvent, type FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation';
+
+
 import {
   Box,
   Button,
@@ -57,7 +60,7 @@ function InputRow({ icon, placeholder, type = 'text', value, onChange }: InputRo
 }
 
 export default function LoginPage() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const [role, setRole] = useState<UserRole>('admin')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -80,19 +83,6 @@ export default function LoginPage() {
       })
 
       if (error) {
-        // Fallback for demo / if Supabase user not seeded: allow mock login for known patterns
-        // Check if email contains academy domain or is demo credential
-        const isDemoBypass = email.includes('admin@') || email.includes('student@') || password === 'Student#2026' || password === 'admin123'
-        if (isDemoBypass) {
-          const mockToken = `mock-${role}-${Date.now()}`
-          const tokenKey = role === 'admin' ? 'cricket_academy_admin_token' : 'cricket_academy_student_token'
-          localStorage.setItem(tokenKey, mockToken)
-          localStorage.setItem('cricket_academy_user_email', email)
-          localStorage.setItem('cricket_academy_user_role', role)
-          setSuccessMessage(`Signed in successfully as ${email} (demo mode)`)
-          navigate(role === 'admin' ? '/Admin-dashboard' : '/student-dashboard')
-          return
-        }
         throw new Error(error.message)
       }
 
@@ -106,7 +96,7 @@ export default function LoginPage() {
       }
 
       setSuccessMessage(`Signed in successfully as ${data.user?.email ?? email}`)
-      navigate(role === 'admin' ? '/Admin-dashboard' : '/student-dashboard')
+      router.push(role === 'admin' ? '/Admin-dashboard' : '/student-dashboard')
     } catch (error: unknown) {
       const msg = error instanceof Error ? error.message : 'Login failed'
       setErrorMessage(msg)

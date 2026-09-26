@@ -1,3 +1,4 @@
+'use client';
 // @ts-nocheck
 import { Box, Stack, Typography } from '@mui/material'
 

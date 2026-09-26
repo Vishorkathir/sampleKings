@@ -1,3 +1,4 @@
+'use client';
 type LogLevel = 'error' | 'warn' | 'info' | 'debug'
 
 const LOG_LEVELS: Record<string, LogLevel> = {
@@ -8,8 +9,8 @@ const LOG_LEVELS: Record<string, LogLevel> = {
 }
 
 const logLevel: string =
-  (import.meta.env as Record<string, string | undefined>).VITE_LOG_LEVEL ||
-  (import.meta.env.PROD ? 'error' : 'debug')
+  (process.env as Record<string, string | undefined>).VITE_LOG_LEVEL ||
+  ((process.env.NODE_ENV === "production") ? 'error' : 'debug')
 
 const shouldLog = (level: LogLevel): boolean => {
   const levels: LogLevel[] = ['error', 'warn', 'info', 'debug']
@@ -33,7 +34,7 @@ const Logger = {
     }
   },
   debug: (context: string, message: string, data?: unknown): void => {
-    if (shouldLog('debug') && !import.meta.env.PROD) {
+    if (shouldLog('debug') && !(process.env.NODE_ENV === "production")) {
       console.log(`[${context}] ${message}`, data)
     }
   },

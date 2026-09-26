@@ -1,5 +1,8 @@
+'use client';
+import { usePathname, useRouter, useParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+
+
 import { Avatar, Box, Button, Checkbox, Grid, Paper, Stack, TextField, Typography } from '@mui/material'
 import AdminLayout from './AdminLayout'
 import { supabase } from '../../../utils/supabase'
@@ -41,9 +44,9 @@ type FormData = {
 
 export default function UpdateStudent() {
   const { studentId } = useParams<{ studentId: string }>()
-  const location = useLocation()
-  const navigate = useNavigate()
-  const initialState = (location.state as { student?: unknown } | null)?.student as Record<string, unknown> | null
+  const pathname = usePathname()
+  const router = useRouter()
+  const initialState = null
 
   const [loading, setLoading] = useState<boolean>(!initialState)
   const [saving, setSaving] = useState<boolean>(false)
@@ -210,7 +213,7 @@ export default function UpdateStudent() {
         .upsert({ user_id: studentId, phone: formData.phone, address: formData.address, guardian_name: formData.guardian_name, guardian_phone: formData.guardian_phone, skills: selectedSkills } as never)
 
       setSuccess('Student details updated successfully via Supabase.')
-      setTimeout(() => navigate('/Admin-dashboard'), 900)
+      setTimeout(() => router.push('/Admin-dashboard'), 900)
     } catch (updateError: unknown) {
       const msg = updateError instanceof Error ? updateError.message : 'Failed to update student'
       setError(msg)
@@ -229,7 +232,7 @@ export default function UpdateStudent() {
               <Typography sx={{ fontSize: 13, color: '#64748b' }}>Edit profile, admission status, skills, and fee details for {studentName}. Supabase backed.</Typography>
             </Box>
             <Stack direction="row" gap={1}>
-              <Button variant="outlined" onClick={() => navigate('/Admin-dashboard')} sx={{ textTransform: 'none' }}>
+              <Button variant="outlined" onClick={() => router.push('/Admin-dashboard')} sx={{ textTransform: 'none' }}>
                 Back
               </Button>
               <Button variant="contained" onClick={handleSubmit} disabled={saving || loading} sx={{ textTransform: 'none', bgcolor: '#1d4ed8', '&:hover': { bgcolor: '#1e40af' } }}>

@@ -1,13 +1,16 @@
+'use client';
 // @ts-nocheck
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
+
+;
 import './ComingSoon.css';
 
 const ComingSoon = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleBack = () => {
-    navigate(-1);
+    router.back();
   };
 
   return (

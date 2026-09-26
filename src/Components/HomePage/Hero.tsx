@@ -1,6 +1,9 @@
+'use client';
 import { useState, useEffect } from 'react';
 import { Box, Container, Button, Typography, AppBar, Toolbar, Grid, IconButton, Drawer, List, ListItem } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
+
+;
 import { FiArrowRight, FiTarget, FiUsers, FiAward, FiPlay, FiMapPin, FiMail, FiPhone, FiCheckCircle, FiStar, FiActivity, FiShield } from 'react-icons/fi';
 import { FaWhatsapp, FaInstagram, FaTwitter, FaFacebookF } from 'react-icons/fa';
 import Logo from "../../assets/images/logo.jpg"
@@ -15,7 +18,7 @@ const navLinks = [
 ];
 
 export default function Hero() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   useEffect(() => {
@@ -49,8 +52,8 @@ export default function Hero() {
               ))}
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.2 }}>
-              <Button onClick={() => navigate('/login')} sx={{ display: { xs: 'none', sm: 'inline-flex' }, color: '#fff', border: '1px solid rgba(255,255,255,0.16)', px: 2.4, borderRadius: '10px', fontWeight: 700, fontSize: 13 }}>Admin</Button>
-              <Button onClick={() => navigate('/login')} endIcon={<FiArrowRight />} sx={{ bgcolor: 'oklch(0.84 0.18 158)', color: 'oklch(0.16 0.02 260)', px: 2.8, borderRadius: '10px', fontWeight: 800, fontSize: 13.5, '&:hover': { bgcolor: 'oklch(0.79 0.18 158)' } }}>Student Login</Button>
+              <Button onClick={() => router.push('/login')} sx={{ display: { xs: 'none', sm: 'inline-flex' }, color: '#fff', border: '1px solid rgba(255,255,255,0.16)', px: 2.4, borderRadius: '10px', fontWeight: 700, fontSize: 13 }}>Admin</Button>
+              <Button onClick={() => router.push('/login')} endIcon={<FiArrowRight />} sx={{ bgcolor: 'oklch(0.84 0.18 158)', color: 'oklch(0.16 0.02 260)', px: 2.8, borderRadius: '10px', fontWeight: 800, fontSize: 13.5, '&:hover': { bgcolor: 'oklch(0.79 0.18 158)' } }}>Student Login</Button>
               <IconButton onClick={() => setMobileOpen(true)} sx={{ display: { xs: 'flex', md: 'none' }, color: '#fff', border: '1px solid rgba(255,255,255,0.12)' }}><Box sx={{ fontSize: 18 }}>☰</Box></IconButton>
             </Box>
           </Toolbar>
@@ -62,7 +65,7 @@ export default function Hero() {
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}><Typography sx={{ fontWeight: 800 }}>Menu</Typography><IconButton onClick={() => setMobileOpen(false)} sx={{ color: '#fff' }}>✕</IconButton></Box>
           <List sx={{ p: 0 }}>
             {navLinks.map((l) => (<ListItem key={l.href} component="a" href={l.href} onClick={() => setMobileOpen(false)} sx={{ color: 'rgba(255,255,255,0.8)', py: 1.6, borderBottom: '1px solid rgba(255,255,255,0.06)', textDecoration: 'none', fontWeight: 600 }}>{l.label}</ListItem>))}
-            <ListItem sx={{ px: 0, py: 2 }}><Typography onClick={() => { navigate('/login'); setMobileOpen(false); }} sx={{ color: 'oklch(0.84 0.18 158)', fontWeight: 800, cursor: 'pointer' }}>Sign in →</Typography></ListItem>
+            <ListItem sx={{ px: 0, py: 2 }}><Typography onClick={() => { router.push('/login'); setMobileOpen(false); }} sx={{ color: 'oklch(0.84 0.18 158)', fontWeight: 800, cursor: 'pointer' }}>Sign in →</Typography></ListItem>
           </List>
         </Box>
       </Drawer>
@@ -88,7 +91,7 @@ export default function Hero() {
                 Modern nets, match simulation, and coaches who've stayed at the crease. We build technique, temperament, and the courage to walk out first.
               </Typography>
               <Box sx={{ display: 'flex', gap: 1.2, flexWrap: 'wrap', mb: 5 }}>
-                <Button onClick={() => navigate('/login')} endIcon={<FiArrowRight />} sx={{ bgcolor: 'oklch(0.84 0.18 158)', color: '#0a1f14', px: 3.4, py: 1.5, borderRadius: '10px', fontWeight: 800, fontSize: 15, '&:hover': { bgcolor: 'oklch(0.79 0.18 158)' } }}>Start your trial</Button>
+                <Button onClick={() => router.push('/login')} endIcon={<FiArrowRight />} sx={{ bgcolor: 'oklch(0.84 0.18 158)', color: '#0a1f14', px: 3.4, py: 1.5, borderRadius: '10px', fontWeight: 800, fontSize: 15, '&:hover': { bgcolor: 'oklch(0.79 0.18 158)' } }}>Start your trial</Button>
                 <Button onClick={() => document.getElementById('programs')?.scrollIntoView({ behavior: 'smooth' })} startIcon={<FiPlay />} sx={{ color: '#fff', border: '1px solid rgba(255,255,255,0.16)', px: 3, py: 1.5, borderRadius: '10px', fontWeight: 700, bgcolor: 'rgba(255,255,255,0.04)', '&:hover': { bgcolor: 'rgba(255,255,255,0.08)' } }}>Watch a session</Button>
               </Box>
               {/* proof strip — not ghost cards */}
@@ -173,7 +176,7 @@ export default function Hero() {
                 Clear entry points by age and ambition. Each programme is a full season — not a weekend clinic.
               </Typography>
             </Box>
-            <Button onClick={() => navigate('/login')} sx={{ color: 'rgba(255,255,255,0.88)', border: '1px solid rgba(255,255,255,0.14)', px: 2.8, borderRadius: '10px', fontWeight: 800, '&:hover': { borderColor: 'rgba(255,255,255,0.24)', bgcolor: 'rgba(255,255,255,0.06)' } }}>Compare programmes →</Button>
+            <Button onClick={() => router.push('/login')} sx={{ color: 'rgba(255,255,255,0.88)', border: '1px solid rgba(255,255,255,0.14)', px: 2.8, borderRadius: '10px', fontWeight: 800, '&:hover': { borderColor: 'rgba(255,255,255,0.24)', bgcolor: 'rgba(255,255,255,0.06)' } }}>Compare programmes →</Button>
           </Box>
 
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.2fr 0.8fr', lg: '1.2fr 0.8fr 1fr' }, gap: 1.6 }}>
@@ -223,7 +226,7 @@ export default function Hero() {
         <Container maxWidth="lg">
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', gap: 2, mb: 3 }}>
             <Typography sx={{ fontFamily: '"Bricolage Grotesque"', fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--ink)' }}>Making waves, locally.</Typography>
-            <Button onClick={() => navigate('/gallery')} variant="outlined" sx={{ borderColor: 'var(--border)', color: 'var(--ink)', borderRadius: '10px', fontWeight: 800, display: { xs: 'none', sm: 'inline-flex' } }}>View gallery</Button>
+            <Button onClick={() => router.push('/gallery')} variant="outlined" sx={{ borderColor: 'var(--border)', color: 'var(--ink)', borderRadius: '10px', fontWeight: 800, display: { xs: 'none', sm: 'inline-flex' } }}>View gallery</Button>
           </Box>
           <Box sx={{ borderRadius: '16px', p: { xs: 2.4, md: 4 }, bgcolor: 'var(--paper)', border: '1px solid var(--border)', display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.1fr 1fr' }, gap: 3 }}>
             <Box>
@@ -239,7 +242,7 @@ export default function Hero() {
             </Box>
             <Box sx={{ borderRadius: '12px', bgcolor: 'var(--surface)', border: '1px dashed var(--border)', p: 2.6, display: 'grid', placeItems: 'center', minHeight: 140 }}>
               <Typography sx={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.08em', color: 'var(--muted)' }}>GALLERY PREVIEW SOON</Typography>
-              <Typography sx={{ fontSize: 13, color: 'var(--muted)', mt: 0.6 }}>Full showcase assembling · <Box component="span" onClick={() => navigate('/gallery')} sx={{ color: 'var(--primary)', cursor: 'pointer', fontWeight: 800 }}>open gallery →</Box></Typography>
+              <Typography sx={{ fontSize: 13, color: 'var(--muted)', mt: 0.6 }}>Full showcase assembling · <Box component="span" onClick={() => router.push('/gallery')} sx={{ color: 'var(--primary)', cursor: 'pointer', fontWeight: 800 }}>open gallery →</Box></Typography>
             </Box>
           </Box>
         </Container>

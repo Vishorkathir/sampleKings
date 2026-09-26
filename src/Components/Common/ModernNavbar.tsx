@@ -1,6 +1,10 @@
+'use client';
+import { usePathname } from 'next/navigation';
 // @ts-nocheck
 import React, { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useRouter } from 'next/navigation';
+
+
 import { Box, Stack, Typography, IconButton, Menu, MenuItem, Avatar, Divider, Badge, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 
 const navLinks = [
@@ -17,8 +21,8 @@ const adminLinks = [
 ]
 
 export default function ModernNavbar({ userData, isAdmin = false, onLogout }) {
-  const navigate = useNavigate()
-  const location = useLocation()
+  const router = useRouter()
+  const pathname = usePathname()
   const [anchorEl, setAnchorEl] = useState(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const links = isAdmin ? adminLinks : navLinks
@@ -26,14 +30,14 @@ export default function ModernNavbar({ userData, isAdmin = false, onLogout }) {
   const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2)
   const handleMenuOpen = (e) => setAnchorEl(e.currentTarget)
   const handleMenuClose = () => setAnchorEl(null)
-  const handleLogout = () => { handleMenuClose(); onLogout?.(); localStorage.removeItem('cricket_academy_student_token'); localStorage.removeItem('cricket_academy_admin_token'); localStorage.removeItem('kings11_student_token'); localStorage.removeItem('kings11_admin_token'); navigate('/login') }
-  const handleNavigation = (p) => { navigate(p); setMobileOpen(false) }
+  const handleLogout = () => { handleMenuClose(); onLogout?.(); localStorage.removeItem('cricket_academy_student_token'); localStorage.removeItem('cricket_academy_admin_token'); localStorage.removeItem('kings11_student_token'); localStorage.removeItem('kings11_admin_token'); router.push('/login') }
+  const handleNavigation = (p) => { router.push(p); setMobileOpen(false) }
 
   return (
     <>
       <Box sx={{ position: 'fixed', inset: '0 0 auto 0', zIndex: 1300, height: 64, bgcolor: 'rgba(255,255,255,0.96)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border)', px: { xs: 2, sm: 3, md: 4 } }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ height: '100%' }}>
-          <Stack direction="row" alignItems="center" gap={1.4} sx={{ cursor: 'pointer' }} onClick={() => navigate(isAdmin ? '/Admin-dashboard' : '/student-dashboard')}>
+          <Stack direction="row" alignItems="center" gap={1.4} sx={{ cursor: 'pointer' }} onClick={() => router.push(isAdmin ? '/Admin-dashboard' : '/student-dashboard')}>
             <Box sx={{ width: 36, height: 36, borderRadius: '10px', bgcolor: 'var(--primary)', color: '#fff', display: 'grid', placeItems: 'center', fontSize: 16, fontWeight: 800 }}>11</Box>
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               <Typography sx={{ fontFamily: '"Bricolage Grotesque"', fontSize: 14.5, fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--ink)', lineHeight: 1 }}>KINGS11</Typography>
@@ -43,9 +47,9 @@ export default function ModernNavbar({ userData, isAdmin = false, onLogout }) {
 
           <Stack direction="row" alignItems="center" gap={0.4} sx={{ display: { xs: 'none', lg: 'flex' }, flex: 1, justifyContent: 'center', px: 4 }}>
             {links.map((link) => {
-              const active = location.pathname === link.path
+              const active = pathname === link.path
               return (
-                <Box key={link.path} onClick={() => navigate(link.path)} sx={{ px: 2, py: 0.7, borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 0.8, color: active ? 'var(--primary)' : 'var(--muted)', fontWeight: active ? 800 : 600, fontSize: 13, bgcolor: active ? 'var(--primary-soft)' : 'transparent', border: active ? '1px solid oklch(0.88 0.06 260)' : '1px solid transparent', transition: 'all 160ms var(--ease-out)', '&:hover': { color: 'var(--primary)', bgcolor: 'var(--primary-soft)' } }}>
+                <Box key={link.path} onClick={() => router.push(link.path)} sx={{ px: 2, py: 0.7, borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 0.8, color: active ? 'var(--primary)' : 'var(--muted)', fontWeight: active ? 800 : 600, fontSize: 13, bgcolor: active ? 'var(--primary-soft)' : 'transparent', border: active ? '1px solid oklch(0.88 0.06 260)' : '1px solid transparent', transition: 'all 160ms var(--ease-out)', '&:hover': { color: 'var(--primary)', bgcolor: 'var(--primary-soft)' } }}>
                   <Box sx={{ fontSize: 14 }}>{link.icon}</Box>
                   <Typography sx={{ fontSize: 13, fontWeight: active ? 800 : 600 }}>{link.label}</Typography>
                 </Box>
@@ -73,7 +77,7 @@ export default function ModernNavbar({ userData, isAdmin = false, onLogout }) {
       </Box>
 
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose} PaperProps={{ sx: { mt: 1, borderRadius: '12px', minWidth: 200, border: '1px solid var(--border)', boxShadow: 'var(--shadow-md)' } }} transformOrigin={{ horizontal: 'right', vertical: 'top' }} anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
-        <MenuItem onClick={() => { navigate(isAdmin ? '/Admin-dashboard' : '/student-info'); handleMenuClose() }} sx={{ py: 1.1, fontSize: 13.5, fontWeight: 600, color: 'var(--ink-2)', '&:hover': { bgcolor: 'var(--surface)' } }}><Box sx={{ mr: 1.4, fontSize: 14 }}>⚙️</Box>Settings</MenuItem>
+        <MenuItem onClick={() => { router.push(isAdmin ? '/Admin-dashboard' : '/student-info'); handleMenuClose() }} sx={{ py: 1.1, fontSize: 13.5, fontWeight: 600, color: 'var(--ink-2)', '&:hover': { bgcolor: 'var(--surface)' } }}><Box sx={{ mr: 1.4, fontSize: 14 }}>⚙️</Box>Settings</MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={handleLogout} sx={{ py: 1.1, fontSize: 13.5, fontWeight: 700, color: 'oklch(0.55 0.20 28)', '&:hover': { bgcolor: 'oklch(0.97 0.02 28)' } }}><Box sx={{ mr: 1.4, fontSize: 14 }}>🚪</Box>Logout</MenuItem>
       </Menu>
@@ -83,7 +87,7 @@ export default function ModernNavbar({ userData, isAdmin = false, onLogout }) {
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 1 }}><IconButton onClick={() => setMobileOpen(false)}>✕</IconButton></Box>
           <List sx={{ display: 'flex', flexDirection: 'column', gap: 0.4 }}>
             {links.map((link) => {
-              const active = location.pathname === link.path
+              const active = pathname === link.path
               return (<ListItem key={link.path} onClick={() => handleNavigation(link.path)} sx={{ px: 1.4, py: 1, borderRadius: '10px', cursor: 'pointer', bgcolor: active ? 'var(--primary-soft)' : 'transparent', color: active ? 'var(--primary)' : 'var(--ink-2)', fontWeight: active ? 800 : 600, border: active ? '1px solid oklch(0.88 0.06 260)' : '1px solid transparent' }}><ListItemIcon sx={{ color: 'inherit', minWidth: 28 }}>{link.icon}</ListItemIcon><ListItemText primary={link.label} primaryTypographyProps={{ fontSize: 13.5, fontWeight: active ? 800 : 600 }} /></ListItem>)
             })}
           </List>

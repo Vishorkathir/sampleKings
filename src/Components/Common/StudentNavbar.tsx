@@ -1,6 +1,10 @@
+'use client';
+import { usePathname } from 'next/navigation';
 // @ts-nocheck
 import React, { useState, useCallback, useMemo } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useRouter } from 'next/navigation';
+
+
 import {
   Box,
   Stack,
@@ -28,8 +32,8 @@ const STUDENT_LINKS = [
 ]
 
 function StudentNavbar({ userData, onLogout }) {
-  const navigate = useNavigate()
-  const location = useLocation()
+  const router = useRouter()
+  const pathname = usePathname()
   const [anchorEl, setAnchorEl] = useState(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [logoutOpen, setLogoutOpen] = useState(false)
@@ -50,17 +54,17 @@ function StudentNavbar({ userData, onLogout }) {
     setLogoutOpen(false)
     onLogout?.()
     localStorage.removeItem('kings11_student_token')
-    navigate('/login')
-  }, [onLogout, navigate])
+    router.push('/login')
+  }, [onLogout, router])
 
   const handleCancelLogout = useCallback(() => {
     setLogoutOpen(false)
   }, [])
 
   const handleNavigation = useCallback((path) => {
-    navigate(path)
+    router.push(path)
     setMobileOpen(false)
-  }, [navigate])
+  }, [router])
 
   return (
     <>
@@ -98,7 +102,7 @@ function StudentNavbar({ userData, onLogout }) {
               '&:hover': { transform: 'translateX(2px)' },
               transition: 'transform 0.2s ease',
             }}
-            onClick={() => navigate('/student-dashboard')}
+            onClick={() => router.push('/student-dashboard')}
           >
             <Box
               sx={{
@@ -171,11 +175,11 @@ function StudentNavbar({ userData, onLogout }) {
             }}
           >
             {STUDENT_LINKS.map((link) => {
-              const active = location.pathname === link.path
+              const active = pathname === link.path
               return (
                 <Box
                   key={link.path}
-                  onClick={() => navigate(link.path)}
+                  onClick={() => router.push(link.path)}
                   sx={{
                     position: 'relative',
                     px: 2.5,
@@ -359,7 +363,7 @@ function StudentNavbar({ userData, onLogout }) {
       >
         <MenuItem
           onClick={() => {
-            navigate('/student-info')
+            router.push('/student-info')
             handleMenuClose()
           }}
           sx={{
@@ -418,7 +422,7 @@ function StudentNavbar({ userData, onLogout }) {
           {/* Mobile Menu Items */}
           <List sx={{ gap: 0.5, display: 'flex', flexDirection: 'column' }}>
             {STUDENT_LINKS.map((link) => {
-              const active = location.pathname === link.path
+              const active = pathname === link.path
               return (
                 <ListItem
                   key={link.path}

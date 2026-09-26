@@ -1,10 +1,13 @@
+'use client';
 // @ts-nocheck
 import { useState } from 'react'
 import {
   Box, Container, Typography, Grid, Button,
   AppBar, Toolbar, Tabs, Tab, IconButton
 } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation';
+
+
 import { FiArrowLeft, FiArrowRight, FiTrendingUp, FiUsers, FiAward, FiZap } from 'react-icons/fi'
 import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa'
 import { FaWhatsapp } from 'react-icons/fa'
@@ -46,7 +49,7 @@ const STATS = [
 ]
 
 export default function AcademyAchievements() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const [tab, setTab] = useState(0)
 
   const current = Object.values(ACHIEVEMENTS)[tab]
@@ -87,13 +90,13 @@ export default function AcademyAchievements() {
       <AppBar position="sticky" elevation={0} sx={{ bgcolor: 'rgba(5,10,7,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
         <Container maxWidth="xl">
           <Toolbar sx={{ justifyContent: 'space-between', py: 1 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, cursor: 'pointer' }} onClick={() => navigate('/')}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, cursor: 'pointer' }} onClick={() => router.push('/')}>
               <Box component="img" src="/Logo.png" alt="Logo" sx={{ width: 40, height: 40, objectFit: 'contain' }} />
               <Typography sx={{ fontWeight: 800, fontSize: 16, background: 'linear-gradient(90deg, #fff, #a3a3a3)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', display: { xs: 'none', sm: 'block' } }}>
                 KINGS11
               </Typography>
             </Box>
-            <Button onClick={() => navigate('/')} startIcon={<FiArrowLeft />}
+            <Button onClick={() => router.push('/')} startIcon={<FiArrowLeft />}
               sx={{
                 color: '#fff', border: '1px solid rgba(255,255,255,0.2)',
                 px: 3, py: 1, borderRadius: 8, fontWeight: 600, textTransform: 'none',
@@ -243,14 +246,14 @@ export default function AcademyAchievements() {
               Join the academy, train under elite coaches, and become part of a legacy that keeps growing every season.
             </Typography>
             <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Button onClick={() => navigate('/')} endIcon={<FiArrowRight />}
+              <Button onClick={() => router.push('/')} endIcon={<FiArrowRight />}
                 sx={{
                   bgcolor: '#00e57a', color: '#041c10', px: 5, py: 2, borderRadius: 8, fontWeight: 800, fontSize: 16, textTransform: 'none',
                   boxShadow: '0 0 30px rgba(0,229,122,0.3)', '&:hover': { bgcolor: '#00ff88', transform: 'translateY(-3px)' }
                 }}>
                 Enroll Now
               </Button>
-              <Button onClick={() => navigate('/')} startIcon={<FiArrowLeft />}
+              <Button onClick={() => router.push('/')} startIcon={<FiArrowLeft />}
                 sx={{
                   color: '#fff', border: '1px solid rgba(255,255,255,0.2)', px: 5, py: 2, borderRadius: 8, fontWeight: 700, fontSize: 16, textTransform: 'none',
                   '&:hover': { bgcolor: 'rgba(255,255,255,0.05)' }

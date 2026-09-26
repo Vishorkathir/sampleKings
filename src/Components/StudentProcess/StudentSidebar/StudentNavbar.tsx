@@ -1,6 +1,10 @@
+'use client';
+import { usePathname } from 'next/navigation';
 // @ts-nocheck
 import { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useRouter } from 'next/navigation';
+
+
 import { Avatar, Box, Stack, Typography, IconButton, Drawer, List, ListItem } from '@mui/material'
 
 const navLinks = [
@@ -12,8 +16,8 @@ const navLinks = [
 ]
 
 export default function StudentNavbar({ studentData }) {
-    const navigate = useNavigate()
-    const location = useLocation()
+    const router = useRouter()
+    const pathname = usePathname()
     const [open, setOpen] = useState(false)
 
     const name = studentData?.user?.full_name || 'Student'
@@ -40,7 +44,7 @@ export default function StudentNavbar({ studentData }) {
                 }}
             >
                 {/* Logo */}
-                <Stack direction="row" alignItems="center" gap={1.2} sx={{ cursor: 'pointer' }} onClick={() => navigate('/student-dashboard')}>
+                <Stack direction="row" alignItems="center" gap={1.2} sx={{ cursor: 'pointer' }} onClick={() => router.push('/student-dashboard')}>
                     <Box
                         sx={{
                             width: 36, height: 36,
@@ -71,11 +75,11 @@ export default function StudentNavbar({ studentData }) {
                     sx={{ display: { xs: 'none', md: 'flex' } }}
                 >
                     {navLinks.map((link) => {
-                        const active = location.pathname === link.path
+                        const active = pathname === link.path
                         return (
                             <Box
                                 key={link.path}
-                                onClick={() => navigate(link.path)}
+                                onClick={() => router.push(link.path)}
                                 sx={{
                                     position: 'relative',
                                     px: 2,
@@ -194,11 +198,11 @@ export default function StudentNavbar({ studentData }) {
 
                 <List sx={{ px: 1 }}>
                     {navLinks.map((link) => {
-                        const active = location.pathname === link.path
+                        const active = pathname === link.path
                         return (
                             <ListItem
                                 key={link.path}
-                                onClick={() => { navigate(link.path); setOpen(false) }}
+                                onClick={() => { router.push(link.path); setOpen(false) }}
                                 sx={{
                                     borderRadius: '10px',
                                     mb: 0.5,

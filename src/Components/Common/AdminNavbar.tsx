@@ -1,6 +1,10 @@
+'use client';
+import { usePathname } from 'next/navigation';
 // @ts-nocheck
 import React, { useState, useCallback, useMemo } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useRouter } from 'next/navigation';
+
+
 import {
   Box,
   Stack,
@@ -29,8 +33,8 @@ const ADMIN_LINKS = [
 const GRADIENT_STYLE = 'linear-gradient(135deg, #0b5aa0 0%, #1d4ed8 100%)'
 
 function AdminNavbar({ userData, onLogout }) {
-  const navigate = useNavigate()
-  const location = useLocation()
+  const router = useRouter()
+  const pathname = usePathname()
   const [anchorEl, setAnchorEl] = useState(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [logoutOpen, setLogoutOpen] = useState(false)
@@ -51,17 +55,17 @@ function AdminNavbar({ userData, onLogout }) {
     setLogoutOpen(false)
     onLogout?.()
     localStorage.removeItem('kings11_admin_token')
-    navigate('/login')
-  }, [onLogout, navigate])
+    router.push('/login')
+  }, [onLogout, router])
 
   const handleCancelLogout = useCallback(() => {
     setLogoutOpen(false)
   }, [])
 
   const handleNavigation = useCallback((path) => {
-    navigate(path)
+    router.push(path)
     setMobileOpen(false)
-  }, [navigate])
+  }, [router])
 
   return (
     <>
@@ -99,7 +103,7 @@ function AdminNavbar({ userData, onLogout }) {
               '&:hover': { transform: 'translateX(2px)' },
               transition: 'transform 0.2s ease',
             }}
-            onClick={() => navigate('/Admin-dashboard')}
+            onClick={() => router.push('/Admin-dashboard')}
           >
             <Box
               sx={{
@@ -172,11 +176,11 @@ function AdminNavbar({ userData, onLogout }) {
             }}
           >
             {ADMIN_LINKS.map((link) => {
-              const active = location.pathname === link.path
+              const active = pathname === link.path
               return (
                 <Box
                   key={link.path}
-                  onClick={() => navigate(link.path)}
+                  onClick={() => router.push(link.path)}
                   sx={{
                     position: 'relative',
                     px: 2.5,
@@ -360,7 +364,7 @@ function AdminNavbar({ userData, onLogout }) {
       >
         <MenuItem
           onClick={() => {
-            navigate('/Admin-dashboard')
+            router.push('/Admin-dashboard')
             handleMenuClose()
           }}
           sx={{
@@ -419,7 +423,7 @@ function AdminNavbar({ userData, onLogout }) {
           {/* Mobile Menu Items */}
           <List sx={{ gap: 0.5, display: 'flex', flexDirection: 'column' }}>
             {ADMIN_LINKS.map((link) => {
-              const active = location.pathname === link.path
+              const active = pathname === link.path
               return (
                 <ListItem
                   key={link.path}

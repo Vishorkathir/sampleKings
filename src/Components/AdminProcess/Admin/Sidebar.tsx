@@ -1,9 +1,13 @@
+'use client';
+import { usePathname } from 'next/navigation';
 // @ts-nocheck
 import { Box, Button, Stack, Typography } from '@mui/material'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation';
+
+
 
 const menuItems = [
-  { label: 'Dashboard', icon: '🏠', path: '/dashboard' },
+  { label: 'Dashboard', icon: '🏠', path: '/Admin-dashboard' },
   { label: 'Student Activities', icon: '👥', path: '/student-activities' },
   // { label: 'Match Information', icon: '🏏', path: '/student-matches' },
   // { label: 'Media Upload', icon: '📤', path: '/media-upload' },
@@ -13,8 +17,8 @@ const menuItems = [
 ]
 
 export default function Sidebar() {
-  const location = useLocation()
-  const navigate = useNavigate()
+  const pathname = usePathname()
+  const router = useRouter()
 
   return (
     <Box
@@ -64,12 +68,12 @@ export default function Sidebar() {
 
         <Stack gap={0.5}>
           {menuItems.map((item) => {
-            const isActive = location.pathname === item.path
+            const isActive = pathname === item.path
 
             return (
               <Box
                 key={item.label}
-                onClick={() => navigate(item.path)}
+                onClick={() => router.push(item.path)}
                 sx={{
                   p: 1.3,
                   borderRadius: 2,

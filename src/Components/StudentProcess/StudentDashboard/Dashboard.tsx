@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react'
 import { Box, Typography, Paper, Stack, Button, Chip, Grid } from '@mui/material'
 import StudentLayout from './StudentLayout'
