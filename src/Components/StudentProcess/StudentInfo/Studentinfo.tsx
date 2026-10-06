@@ -1,18 +1,10 @@
 'use client';
 // @ts-nocheck
-import { Avatar, Box, Button, Chip, Divider, IconButton, Paper, Stack, Typography, CircularProgress, Alert } from '@mui/material'
+import { Avatar, Box, Button, Chip, Divider, Paper, Stack, Typography, CircularProgress, Alert } from '@mui/material'
 import { useEffect, useState } from 'react'
 import StudentLayout from '../StudentDashboard/StudentLayout'
 import { supabase } from '../../../utils/supabase'
 
-const sideMenu = [
-  { label: 'Dashboard', icon: '📊' },
-  { label: 'Student Activities', icon: '👥' },
-  { label: 'Match Information', icon: '🏏' },
-  { label: 'Media Upload', icon: '📤' },
-  { label: 'Shop Information', icon: '🛒' },
-  { label: 'Settings', icon: '⚙️', active: true },
-]
 const battingStats = [
   { label: 'Runs', key: 'runs' },
   { label: 'Average', key: 'average' },

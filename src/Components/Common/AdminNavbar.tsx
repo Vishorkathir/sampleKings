@@ -30,8 +30,6 @@ const ADMIN_LINKS = [
   { label: 'League', icon: '🏏', path: '/coming-soon' },
 ]
 
-const GRADIENT_STYLE = 'linear-gradient(135deg, #0b5aa0 0%, #1d4ed8 100%)'
-
 function AdminNavbar({ userData, onLogout }) {
   const router = useRouter()
   const pathname = usePathname()
@@ -49,7 +47,7 @@ function AdminNavbar({ userData, onLogout }) {
   const handleLogoutClick = useCallback(() => {
     handleMenuClose()
     setLogoutOpen(true)
-  }, [])
+  }, [handleMenuClose])
 
   const handleConfirmLogout = useCallback(() => {
     setLogoutOpen(false)

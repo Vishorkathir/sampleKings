@@ -234,9 +234,9 @@ export default function Registeration() {
 
   return (
     <AdminLayout>
-      <Box sx={{ p: 3, maxWidth: 960 }}>
+      <Box sx={{ p: 3, maxWidth: 960, mx: 'auto' }}>
         <Paper elevation={0} sx={{ p: 2.2, borderRadius: 2.5, border: '1px solid #e8edf5', bgcolor: '#fff', mb: 3 }}>
-          <Stack direction={{ xs: 'column', sm: 'row' }} alignItems={{ xs: 'flex-start', sm: 'center' }} sx={{ mt: 4 }} justifyContent="space-between" gap={4}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} alignItems={{ xs: 'flex-start', sm: 'center' }} justifyContent="space-between" gap={4}>
             <Stack direction="row" alignItems="center" gap={1.2}>
               <Avatar sx={{ width: 38, height: 38, bgcolor: '#eff6ff', color: '#1d4ed8' }}>🛡️</Avatar>
               <Box>

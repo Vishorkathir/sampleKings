@@ -1,7 +1,6 @@
 'use client';
 // @ts-nocheck
 import {
-	Avatar,
 	Box,
 	Button,
 	Chip,
@@ -11,8 +10,6 @@ import {
 	Stack,
 	Typography,
 } from '@mui/material'
-import { useRouter } from 'next/navigation';
-
 
 import StudentLayout from '../StudentDashboard/StudentLayout'
 
@@ -80,8 +77,6 @@ const milestones = [
 ]
 
 export default function StudentActivities() {
-	const router = useRouter()
-
 	return (
 		<StudentLayout activePath="/student-activities">
 			<Box sx={{ p: 3 }}>

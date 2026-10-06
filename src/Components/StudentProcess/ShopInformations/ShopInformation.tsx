@@ -2,7 +2,7 @@
 // @ts-nocheck
 import { useState } from 'react'
 import {
-  Avatar, Box, Button, Chip, Grid, IconButton,
+  Box, Button, Chip, Grid, IconButton,
   Paper, Stack, Typography, Badge
 } from '@mui/material'
 import StudentLayout from '../StudentDashboard/StudentLayout'
@@ -101,7 +101,7 @@ function StarRating({ value }) {
   )
 }
 
-function ProductCard({ product, onAdd, cartCount }) {
+function ProductCard({ product, onAdd }) {
   const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
 
   return (
@@ -356,7 +356,7 @@ export default function ShopInformation() {
           <Grid container spacing={3}>
             {filtered.map((product) => (
               <Grid item xs={12} sm={6} md={4} key={product.id}>
-                <ProductCard product={product} onAdd={handleAdd} cartCount={cart[product.id] || 0} />
+                <ProductCard product={product} onAdd={handleAdd} />
               </Grid>
             ))}
           </Grid>

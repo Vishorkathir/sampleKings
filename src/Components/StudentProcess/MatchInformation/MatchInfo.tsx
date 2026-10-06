@@ -11,8 +11,6 @@ import {
 	Stack,
 	Typography,
 } from '@mui/material'
-import { useRouter } from 'next/navigation';
-
 
 import StudentLayout from '../StudentDashboard/StudentLayout'
 
@@ -35,8 +33,6 @@ const quickActions = [
 ]
 
 export default function MatchInfo() {
-	const router = useRouter()
-
 	return (
 		<StudentLayout activePath="/student-matches">
 			<Box sx={{ flex: 1, p: 3 }}>

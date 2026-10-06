@@ -4,6 +4,7 @@ import { ThemeProvider, createTheme, CssBaseline } from '@mui/material'
 
 type ThemeContextValue = { isDarkMode: boolean; toggleTheme: () => void }
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined)
+// oxlint-disable-next-line react(only-export-components)
 export function useThemeMode(): ThemeContextValue {
   const context = useContext(ThemeContext)
   if (!context) throw new Error('useThemeMode must be used within ThemeContextProvider')

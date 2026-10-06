@@ -154,6 +154,7 @@ export default function Dashboard() {
     }
   }, [])
 
+  // oxlint-disable-next-line react(set-state-in-effect)
   useEffect(() => {
     fetchStudents()
   }, [fetchStudents])

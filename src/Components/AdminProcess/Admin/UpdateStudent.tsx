@@ -1,5 +1,5 @@
 'use client';
-import { usePathname, useRouter, useParams } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react'
 
 
@@ -44,7 +44,6 @@ type FormData = {
 
 export default function UpdateStudent() {
   const { studentId } = useParams<{ studentId: string }>()
-  const pathname = usePathname()
   const router = useRouter()
   const initialState = null
 
@@ -69,6 +68,7 @@ export default function UpdateStudent() {
 
   const studentName = useMemo(() => formData.full_name || 'Student Details', [formData.full_name])
 
+  // oxlint-disable-next-line react(set-state-in-effect)
   useEffect(() => {
     if (!studentId) {
       setError('Student ID is missing.')

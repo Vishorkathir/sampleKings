@@ -48,7 +48,7 @@ function StudentNavbar({ userData, onLogout }) {
   const handleLogoutClick = useCallback(() => {
     handleMenuClose()
     setLogoutOpen(true)
-  }, [])
+  }, [handleMenuClose])
 
   const handleConfirmLogout = useCallback(() => {
     setLogoutOpen(false)
