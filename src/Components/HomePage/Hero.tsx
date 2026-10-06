@@ -40,7 +40,7 @@ export default function Hero() {
         <Container maxWidth="xl">
           <Toolbar sx={{ justifyContent: 'space-between', py: scrolled ? 0.5 : 1, minHeight: { xs: 64, md: 72 } }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>
-              <Box component="img" src={Logo} alt="Kings11 logo" sx={{ width: 40, height: 40, borderRadius: '9px', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.12)' }} />
+              <Box component="img" src={Logo.src} alt="Kings11 logo" sx={{ width: 40, height: 40, borderRadius: '9px', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.12)' }} />
               <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                 <Typography sx={{ fontFamily: '"Bricolage Grotesque"', fontWeight: 800, fontSize: 16, letterSpacing: '-0.02em', lineHeight: 1 }}>KINGS11</Typography>
                 <Typography sx={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', color: 'oklch(0.84 0.18 158)', lineHeight: 1 }}>CRICKET ACADEMY</Typography>
@@ -72,7 +72,7 @@ export default function Hero() {
 
       {/* HERO — Cinematic field, left copy, right photographic */}
       <Box sx={{ position: 'relative', minHeight: { xs: 'auto', md: '100svh' }, display: 'flex', alignItems: 'center', pt: { xs: 10, md: 0 }, pb: { xs: 6, md: 0 }, bgcolor: '#050A07', overflow: 'hidden' }}>
-        <Box component="img" src={heroBatsman} alt="Cricket batsman under floodlights" sx={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', opacity: 0.52 }} />
+        <Box component="img" src={heroBatsman.src} alt="Cricket batsman under floodlights" sx={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', opacity: 0.52 }} />
         <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(5,10,7,0.98) 0%, rgba(5,10,7,0.92) 36%, rgba(5,10,7,0.46) 68%, rgba(5,10,7,0.18) 100%)' }} />
         <Box sx={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 220, background: 'linear-gradient(to top, rgba(5,10,7,1) 0%, transparent 100%)' }} />
         <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 2, py: { xs: 4, md: 12 } }}>
@@ -134,7 +134,7 @@ export default function Hero() {
           <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
             <Grid item xs={12} md={6}>
               <Box sx={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', bgcolor: '#0B1410', border: '1px solid rgba(0,0,0,0.08)', aspectRatio: '4/3' }}>
-                <Box component="img" src={trainingNets} alt="Training nets at dusk, Thuraiyur" sx={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.94 }} />
+                <Box component="img" src={trainingNets.src} alt="Training nets at dusk, Thuraiyur" sx={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.94 }} />
                 <Box sx={{ position: 'absolute', bottom: 16, left: 16, px: 1.8, py: 1.2, borderRadius: '12px', bgcolor: 'rgba(255,255,255,0.96)', border: '1px solid rgba(0,0,0,0.08)' }}>
                   <Typography sx={{ fontSize: 12, fontWeight: 800, letterSpacing: '0.08em', color: 'oklch(0.52 0.20 260)' }}> SINCE 2009</Typography>
                   <Typography sx={{ fontSize: 22, fontWeight: 800, color: 'var(--ink)', lineHeight: 1 }}>Thuraiyur, Trichy</Typography>

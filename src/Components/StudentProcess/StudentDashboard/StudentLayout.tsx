@@ -57,7 +57,8 @@ export default function StudentLayout({ children, activePath: _activePath }: Stu
   return (
     <Box sx={{ bgcolor: '#f5f7fb', minHeight: '100vh' }}>
       <StudentNavbar userData={studentData} onLogout={handleLogout} />
-      <Box sx={{ pt: '64px', p: { xs: 2, md: 3 } }}>{children}</Box>
+      <Box sx={{ height: 70 }} />
+      <Box sx={{ p: { xs: 2, md: 3 } }}>{children}</Box>
     </Box>
   )
 }

@@ -8,22 +8,32 @@ import { useRouter } from 'next/navigation';
 import { FiArrowLeft, FiX, FiCamera, FiImage, FiMaximize2 } from 'react-icons/fi'
 import { FaWhatsapp, FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa'
 
-// ─── ADD YOUR IMAGES HERE ──────────────────────────────────────────────────────
-// Replace `src: null` with a real image path like `src: '/gallery/match1.jpg'`
-// or an imported asset like `src: img1`
+import img1 from '../../assets/images/img1.jpg'
+import img2 from '../../assets/images/img2.jpg'
+import img3 from '../../assets/images/img3.jpg'
+import img4 from '../../assets/images/img4.jpg'
+import img5 from '../../assets/images/img5.jpg'
+import img6 from '../../assets/images/img6.jpg'
+import img7 from '../../assets/images/img7.jpg'
+import img8 from '../../assets/images/img8.jpg'
+import img9 from '../../assets/images/img9.jpg'
+import img10 from '../../assets/images/img10.jpg'
+import img11 from '../../assets/images/img11.jpg'
+import img12 from '../../assets/images/img12.jpg'
+
 const GALLERY_ITEMS = [
-    { id: 1, src: null, category: 'Training', caption: 'Morning Net Session', sub: 'Intensive batting drills' },
-    { id: 2, src: null, category: 'Match', caption: 'District Tournament Final', sub: 'Winning moment — 2024' },
-    { id: 3, src: null, category: 'Ceremony', caption: 'Trophy Presentation', sub: 'State Champions Celebration' },
-    { id: 4, src: null, category: 'Training', caption: 'Bowling Mechanics Workshop', sub: 'Spin & Pace coaching' },
-    { id: 5, src: null, category: 'Match', caption: 'Night Match Under Lights', sub: 'Kings11 v/s District XI' },
-    { id: 6, src: null, category: 'Ceremony', caption: 'Annual Award Night', sub: 'Best performer awards' },
-    { id: 7, src: null, category: 'Training', caption: 'Fielding & Catching Drills', sub: 'Ground fielding session' },
-    { id: 8, src: null, category: 'Match', caption: 'Youth Championship 2023', sub: 'Quarter-final victory' },
-    { id: 9, src: null, category: 'Behind Scenes', caption: 'Team Strategy Huddle', sub: 'Pre-match analysis session' },
-    { id: 10, src: null, category: 'Training', caption: 'Strength & Conditioning', sub: 'Fitness camp — Season 2024' },
-    { id: 11, src: null, category: 'Match', caption: 'Opening Ceremony', sub: 'Inter-Academy League 2023' },
-    { id: 12, src: null, category: 'Behind Scenes', caption: 'Coach Mentoring Session', sub: '1-on-1 player feedback' },
+    { id: 1, src: img1.src, category: 'Training', caption: 'Morning Net Session', sub: 'Intensive batting drills' },
+    { id: 2, src: img2.src, category: 'Match', caption: 'District Tournament Final', sub: 'Winning moment — 2024' },
+    { id: 3, src: img3.src, category: 'Ceremony', caption: 'Trophy Presentation', sub: 'State Champions Celebration' },
+    { id: 4, src: img4.src, category: 'Training', caption: 'Bowling Mechanics Workshop', sub: 'Spin & Pace coaching' },
+    { id: 5, src: img5.src, category: 'Match', caption: 'Night Match Under Lights', sub: 'Kings11 v/s District XI' },
+    { id: 6, src: img6.src, category: 'Ceremony', caption: 'Annual Award Night', sub: 'Best performer awards' },
+    { id: 7, src: img7.src, category: 'Training', caption: 'Fielding & Catching Drills', sub: 'Ground fielding session' },
+    { id: 8, src: img8.src, category: 'Match', caption: 'Youth Championship 2023', sub: 'Quarter-final victory' },
+    { id: 9, src: img9.src, category: 'Behind Scenes', caption: 'Team Strategy Huddle', sub: 'Pre-match analysis session' },
+    { id: 10, src: img10.src, category: 'Training', caption: 'Strength & Conditioning', sub: 'Fitness camp — Season 2024' },
+    { id: 11, src: img11.src, category: 'Match', caption: 'Opening Ceremony', sub: 'Inter-Academy League 2023' },
+    { id: 12, src: img12.src, category: 'Behind Scenes', caption: 'Coach Mentoring Session', sub: '1-on-1 player feedback' },
 ]
 
 const CATEGORIES = ['All', 'Training', 'Match', 'Ceremony', 'Behind Scenes']
@@ -149,10 +159,11 @@ export default function Gallery() {
                         const accentColor = CATEGORY_COLOR[item.category] || '#00e57a'
                         return (
                             <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}
-                                sx={{ animation: `fadeUp 0.4s ease ${idx * 0.05}s both` }}>
+                                sx={{ display: 'flex', animation: `fadeUp 0.4s ease ${idx * 0.05}s both` }}>
                                 <Box
                                     onClick={() => setLightbox(item)}
                                     sx={{
+                                        display: 'flex', flexDirection: 'column', width: '100%',
                                         position: 'relative', borderRadius: 5, overflow: 'hidden', cursor: 'pointer',
                                         bgcolor: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)',
                                         transition: 'all 0.4s ease',
@@ -167,7 +178,7 @@ export default function Gallery() {
 
                                     {/* ── Image / Placeholder ── */}
                                     <Box sx={{
-                                        width: '100%', aspectRatio: '4/3', bgcolor: '#0c1610', position: 'relative',
+                                        width: '100%', aspectRatio: '4/3', flexShrink: 0, bgcolor: '#0c1610', position: 'relative',
                                         display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden',
                                     }}>
                                         {item.src ? (
@@ -207,7 +218,7 @@ export default function Gallery() {
                                     </Box>
 
                                     {/* ── Caption Section ── */}
-                                    <Box sx={{ p: 2.5 }}>
+                                    <Box sx={{ p: 2.5, flex: 1 }}>
                                         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
                                             <Typography sx={{ fontSize: 15, fontWeight: 800, lineHeight: 1.3, flex: 1, pr: 1 }}>
                                                 {item.caption}

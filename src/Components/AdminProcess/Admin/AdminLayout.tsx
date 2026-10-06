@@ -37,7 +37,8 @@ export default function AdminLayout({ children }) {
   return (
     <Box sx={{ bgcolor: '#f5f7fb', minHeight: '100vh' }}>
       <AdminNavbar userData={adminData} onLogout={handleLogout} />
-      <Box sx={{ pt: '70px', p: { xs: 2, md: 4 } }}>{children}</Box>
+      <Box sx={{ height: 70 }} />
+      <Box sx={{ p: { xs: 2, md: 4 } }}>{children}</Box>
     </Box>
   )
 }
